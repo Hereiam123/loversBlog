@@ -18,15 +18,13 @@
         $author = mysqli_real_escape_string($db->link, $_POST['author']);
         $tags = mysqli_real_escape_string($db->link, $_POST['tags']);
 
-        if($title == '' || $body == '' || $category == '' || $author == '')
-        {
+        if($title == '' || $body == '' || $category == '' || $author == ''){
             //Set error
             $error = 'Please fill all required fields';
             echo $error;
         }
-        else
-        {
-            $query = "INSERT into posts (title, body, category, author, tags)
+        else{
+            $query = "INSERT INTO posts (title, body, category, author, tags)
                 VALUES ('$title', '$body', $category, '$author', '$tags')";
 
             $insert_row = $db->insert($query);
