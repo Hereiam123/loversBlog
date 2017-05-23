@@ -5,13 +5,13 @@
 
     //Make query
     $query="SELECT posts.*, categories.name FROM posts
-    INNER JOIN categories ON posts.category = categories.id";
+    INNER JOIN categories ON posts.category = categories.id ORDER BY posts.date DESC";
 
     //Run query
     $posts = $db->select($query);
 
     //Create Query
-    $query = "SELECT * FROM categories";
+    $query = "SELECT * FROM categories ORDER BY id";
 
     //Run Query
     $categories = $db->select($query);
