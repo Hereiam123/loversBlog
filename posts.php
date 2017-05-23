@@ -4,7 +4,7 @@
     //Create DB Object
     $db = new Database();
 
-    //Check url for category
+    //Check url for category and create query
     if(isset($_GET['category'])){
         $category=$_GET['category'];
          $query = "SELECT * FROM posts WHERE category= ".$category;
