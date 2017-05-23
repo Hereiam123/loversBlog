@@ -15,7 +15,6 @@
 
         //Assign variable name
         $name = mysqli_real_escape_string($db->link, $_POST['name']);
-        echo $name;
 
         //see if name is empty
         if($name == ''){

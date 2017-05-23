@@ -42,12 +42,20 @@
                                        category = $category,
                                        author = '$author',
                                        tags = '$tags'
-                                       WHERE id ='".$id."'";
+                                       WHERE id =".$id;
 
             $update_row = $db->update($query);
         }
     }
 
+?>
+
+<?php
+    if(isset($_POST['Delete'])){
+        $query = "DELETE FROM posts WHERE id=".$id;
+
+        $delete_row = $db->delete($query);
+    }
 ?>
 
     <form method="post" action="edit_post.php?id=<?php echo $id; ?>">
@@ -87,7 +95,7 @@
       <div class="form-group">
         <input type="submit" value="Submit" class="btn btn-default" name="Submit" />
         <a href="index.php" class="btn btn-default">Cancel</a>
-        <input type="button" value="Delete" class="btn btn-danger" name="submit" />
+        <input type="submit" value="Delete" class="btn btn-danger" name="Delete" />
       </div>
     </form>
 
