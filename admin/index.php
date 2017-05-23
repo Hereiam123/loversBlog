@@ -1,4 +1,5 @@
 <?php include 'includes/header.php' ; ?>
+
 <?php
     //Create DB Object
     $db=new Database;
