@@ -12,6 +12,12 @@
 
     //Run Query
     $posts = $db->select($query);
+
+    //Create Query
+    $query = "SELECT * FROM categories";
+
+    //Run Query
+    $categories = $db->select($query);
 ?>
 
 <?php if($posts) : ?>
