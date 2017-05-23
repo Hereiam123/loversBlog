@@ -1,37 +1,32 @@
 <?php include 'config/config.php'; ?>
 <?php include 'libraries/Database.php'; ?>
 <?php include 'includes/header.php'; ?>
+<?php include 'helpers/format_helper.php'; ?>
 
 <?php
     //Create DB Object
     $db = new Database();
+
+    //Create Query
+    $query = "SELECT * FROM posts";
+
+    //Run Query
+    $posts = $db->select($query);
 ?>
 
-<div class="blog-post">
-<h2 class="blog-post-title">PHP conference 2017</h2>
-<p class="blog-post-meta">January 1, 2017 by <a href="#">Mark</a></p>
-<p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquam convallis lorem et lacinia. Sed faucibus nibh vel eleifend vestibulum. Sed odio risus, dictum ac justo ut, rhoncus volutpat dolor. Maecenas maximus pretium fermentum. Fusce felis augue, tristique sed orci porta, porttitor accumsan nisl. In pharetra commodo felis quis dictum. Duis hendrerit ultrices fringilla. Aliquam erat volutpat. Nulla id libero est. Nulla efficitur nisl sit amet purus elementum dignissim. Donec ligula lectus, venenatis et rutrum a, tempus eu est. Pellentesque blandit accumsan nunc ut laoreet. Donec ut egestas arcu. Praesent finibus sit amet quam eu ornare. Nunc eros nibh, aliquet at ligula sit amet, venenatis sagittis nibh. Suspendisse facilisis quis sem eu porttitor.
-</p>
-<a class="readmore" href="post.php?id=1">Read More</a>
-</div><!-- /.blog-post -->
-
-<div class="blog-post">
-  <h2 class="blog-post-title">PHP International Fun Day</h2>
-  <p class="blog-post-meta">February 13, 2017 by <a href="#">Mark</a></p>
-  <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquam convallis lorem et lacinia. Sed faucibus nibh vel eleifend vestibulum. Sed odio risus, dictum ac justo ut, rhoncus volutpat dolor. Maecenas maximus pretium fermentum. Fusce felis augue, tristique sed orci porta, porttitor accumsan nisl. In pharetra commodo felis quis dictum. Duis hendrerit ultrices fringilla. Aliquam erat volutpat. Nulla id libero est. Nulla efficitur nisl sit amet purus elementum dignissim. Donec ligula lectus, venenatis et rutrum a, tempus eu est. Pellentesque blandit accumsan nunc ut laoreet. Donec ut egestas arcu. Praesent finibus sit amet quam eu ornare. Nunc eros nibh, aliquet at ligula sit amet, venenatis sagittis nibh. Suspendisse facilisis quis sem eu porttitor.
-  </p>
-  <a class="readmore" href="post.php?id=2">Read More</a>
-</div><!-- /.blog-post -->
-
-<div class="blog-post">
-    <h2 class="blog-post-title">PHP SQL Query Questions</h2>
-    <p class="blog-post-meta">March 24, 2017 by <a href="#">Mark</a></p>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec aliquam convallis lorem et lacinia. Sed faucibus nibh vel eleifend vestibulum. Sed odio risus, dictum ac justo ut, rhoncus volutpat dolor. Maecenas maximus pretium fermentum. Fusce felis augue, tristique sed orci porta, porttitor accumsan nisl. In pharetra commodo felis quis dictum. Duis hendrerit ultrices fringilla. Aliquam erat volutpat. Nulla id libero est. Nulla efficitur nisl sit amet purus elementum dignissim. Donec ligula lectus, venenatis et rutrum a, tempus eu est. Pellentesque blandit accumsan nunc ut laoreet. Donec ut egestas arcu. Praesent finibus sit amet quam eu ornare. Nunc eros nibh, aliquet at ligula sit amet, venenatis sagittis nibh. Suspendisse facilisis quis sem eu porttitor.
-    </p>
-    <a class="readmore" href="post.php?id=3">Read More</a>
-</div><!-- /.blog-post -->
+<?php if($posts) : ?>
+    <?php while($row = $posts->fetch_assoc()) : ?>
+        <div class="blog-post">
+        <h2 class="blog-post-title"><?php echo $row['title']; ?></h2>
+        <p class="blog-post-meta"><?php echo formatDate($row['date']); ?><a href="#"><?php echo $row['author']; ?></a></p>
+        <p>
+            <?php echo shortenText($row['body']); ?>
+        </p>
+        <a class="readmore" href="post.php?id=<?php echo urlencode($row['id']); ?> ">Read More</a>
+        </div><!-- /.blog-post -->
+    <?php endwhile; ?>
+<?php else : ?>
+    <p>There are no posts yet </p>
+<?php endif; ?>
 
 <?php include 'includes/footer.php'; ?>
