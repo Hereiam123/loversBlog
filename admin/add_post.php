@@ -27,7 +27,7 @@
         else
         {
             $query = "INSERT into posts (title, body, category, author, tags)
-                VALUES ('$title', '$body', '$category', '$author', '$tags')";
+                VALUES ('$title', '$body', $category, '$author', '$tags')";
 
             $insert_row = $db->insert($query);
         }
@@ -66,7 +66,7 @@
               $selected='';
             }
             ?>
-            <option <?php echo $selected; ?> ><?php echo $row['name']; ?></option>
+            <option <?php echo $selected; ?> value="<?php echo $row['id']; ?>" ><?php echo $row['name']; ?></option>
             <?php endwhile; ?>
           </select>
       </div>
