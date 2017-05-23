@@ -36,7 +36,7 @@
     <div class="container">
 
       <div class="blog-header">
-        <h2 class="blog-title">Admin Area.</h2>
+        <h2>Admin Area</h2>
       </div>
 
       <div class="row">
